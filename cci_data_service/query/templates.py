@@ -11,7 +11,7 @@ area_extraction = """
 for c in ({coverage})
 return
 encode (
-   c[Lat({lat1}:{lat2}), Long({lon1}:{lon2), ansi("{date}")], "csv"
+   c[Lat({lat1}:{lat2}), Long({lon1}:{lon2}), ansi("{date}")], "{output}"
 )
 """
 point_extraction_timeseries = """

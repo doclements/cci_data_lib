@@ -1,4 +1,6 @@
+# pylint: disable=W0311
 import requests
+
 
 
 def create_query(queryObj):
@@ -9,4 +11,8 @@ def create_query(queryObj):
 
 def web_post(url, payload):
    return requests.post(url, data=payload).text
-   
+
+def web_post_file(url, payload):
+   return requests.post(url, data=payload).content
+
+
