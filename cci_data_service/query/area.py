@@ -1,9 +1,9 @@
 # pylint: disable=W0311
+import numpy as np
 
 from .templates import area_extraction
 from cci_data_service.utils import create_query, web_post, web_post_file
 from cci_data_service.query.query import Query
-import numpy as np
 
 class Area(Query):
     def __init__(self, service, lat1,lat2, lon1, lon2, date, coverage, output="csv"):
@@ -25,11 +25,8 @@ class Area(Query):
         self.query = create_query(self)
         if self.output == "csv":
             self.data = web_post(self.service, {"query":self.query})[1:-1]
-            print len(self.data)
             self.data = self.data.split('},{')
-            print len(self.data)
             self.data = [x.split(',') for x in self.data]
-            print len(self.data)
             self.data = np.array(self.data)
             self.data = self.data.astype(np.float)
         if self.output == "netcdf":
