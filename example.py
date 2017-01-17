@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib
 
 _service = services['pml']
+_ecmwf_service = services['ecmwf']
 
 # point = Point(_service,55, -40, "2006-06-01T00:00:00Z", coverages['v_3.0']['chlor_a'])
 # print point.data
@@ -46,14 +47,20 @@ _service = services['pml']
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
 # need a clean way to remove nulls
-areaTS = AreaTimeseries(_service, 50, 60, -15, 0, "2006-06-01T00:00:00Z","2006-11-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="csv")
-areaTS.data[areaTS.data == 9.96921e+36] = None
-_min =  np.nanmin(areaTS.data)
-_max =  np.nanmax(areaTS.data)
-st_val = 231
-plt.figure(1)
-for x in range(areaTS.data.shape[0]):
-   temp = st_val + x
-   f = plt.subplot(temp)
-   f.imshow(areaTS.data[x],norm=matplotlib.colors.LogNorm(vmin=_min, vmax=_max) )
-plt.show()
+# areaTS = AreaTimeseries(_service, 50, 60, -15, 0, "2006-06-01T00:00:00Z","2006-11-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="csv")
+# areaTS.data[areaTS.data == 9.96921e+36] = None
+# _min =  np.nanmin(areaTS.data)
+# _max =  np.nanmax(areaTS.data)
+# st_val = 231
+# plt.figure(1)
+# for x in range(areaTS.data.shape[0]):
+#    temp = st_val + x
+#    f = plt.subplot(temp)
+#    f.imshow(areaTS.data[x],norm=matplotlib.colors.LogNorm(vmin=_min, vmax=_max) )
+# plt.show()
+
+
+#ECMWF data test
+point = Point(_ecmwf_service,55, -40, "1979-01-01T00:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
+print point.data
+
