@@ -26,10 +26,12 @@ class AreaTimeseries(Query):
         self.query = create_query(self)
         if self.output == "csv":
             self.data = web_post(self.service, {"query":self.query})
-            print self.data
             self.data = self.data[2:-2]
-            self.data = self.data.split('},{')
-            self.data = [x.split(',') for x in self.data]
+            self.data = self.data.split('}},{{')
+            print len(self.data)
+
+            self.data = [x.split('},{') for x in self.data]
+            self.data = [[x.split(',') for x in y] for y in self.data]
             self.data = np.array(self.data)
             self.data = self.data.astype(np.float)
         if self.output == "netcdf":

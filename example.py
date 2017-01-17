@@ -52,5 +52,5 @@ print areaTS.data
 print np.min(areaTS.data)
 print np.max(areaTS.data)
 areaTS.data[areaTS.data == 9.96921e+36] = None
-plt.imshow(areaTS.data, norm=matplotlib.colors.LogNorm())
+plt.imshow(areaTS.data[0], norm=matplotlib.colors.LogNorm())
 plt.show()
