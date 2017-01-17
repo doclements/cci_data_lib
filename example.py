@@ -46,11 +46,18 @@ _service = services['pml']
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
 # need a clean way to remove nulls
-areaTS = AreaTimeseries(_service, 50, 51, -50, -48, "2006-06-01T00:00:00Z","2006-09-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="csv")
-print areaTS.data.shape
-print areaTS.data
-print np.min(areaTS.data)
-print np.max(areaTS.data)
+areaTS = AreaTimeseries(_service, 50, 60, -15, 0, "2006-06-01T00:00:00Z","2006-11-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="csv")
+# print areaTS.data.shape
+# print areaTS.data
+# print np.min(areaTS.data)
+# print np.max(areaTS.data)
 areaTS.data[areaTS.data == 9.96921e+36] = None
-plt.imshow(areaTS.data[0], norm=matplotlib.colors.LogNorm())
+st_val = 231
+plt.figure(1)
+for x in range(areaTS.data.shape[0]):
+   temp = st_val + x
+   print temp
+   
+   f = plt.subplot(temp)
+   f.imshow(areaTS.data[x],norm=matplotlib.colors.LogNorm() )
 plt.show()

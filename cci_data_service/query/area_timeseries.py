@@ -28,7 +28,6 @@ class AreaTimeseries(Query):
             self.data = web_post(self.service, {"query":self.query})
             self.data = self.data[2:-2]
             self.data = self.data.split('}},{{')
-            print len(self.data)
 
             self.data = [x.split('},{') for x in self.data]
             self.data = [[x.split(',') for x in y] for y in self.data]
