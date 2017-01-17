@@ -61,6 +61,13 @@ _ecmwf_service = services['ecmwf']
 
 
 #ECMWF data test
-point = Point(_ecmwf_service,55, -40, "1979-01-01T00:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
+point = Point(_ecmwf_service,50.347472, -4.217737, "2012-01-01T00:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
 print point.data
+print point.data  - 273.15
+point = Point(_ecmwf_service,50.347472, -4.217737, "2012-01-01T06:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
+print point.data
+print point.data  - 273.15
+point = Point(_ecmwf_service,50.347472, -4.217737, "2012-01-01T12:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
+print point.data
+print point.data  - 273.15
 
