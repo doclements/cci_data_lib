@@ -25,10 +25,10 @@ The library will allow predefined queries to be run and the results will be pars
 ## redesign of service object
 
 1. have a `service` Class that is initialised by service url
-2. this class responsibility is to either get service info from :-
+2. this class's responsibility is to either get service info from :-
   * static config file
   * web coverage service description docs -> stored in config files hereafter
-  * taking config info from user during initi params
+  * taking config info from user during init params
 
 ## TBD for multi/hyperspectral
 
@@ -39,3 +39,18 @@ The library will allow predefined queries to be run and the results will be pars
   * or we can continue down the config file route?
   * could get huge but parsing xml every time would be slow as hell
   * axis info is definietly needed by all services - again slow vs big config file.
+
+
+### how could a fully dynamic system be called?
+
+Current signature is  :
+`Point(_service,55, -40, "2006-06-01T00:00:00Z", coverages['v_3.0']['chlor_a'])`
+This takes a URL from the services dictionary and a coverage from a similar dictionary.
+
+If we want to make it truly dynamic how are users going to know what coverage name to give anyway? Does the actual use of the library implies a certain knowledge about the data?
+
+I think it is probably OK to assume that, like with libs like `OWSLib`, the user will probably use the library in interactive mode to get the info then will use in static script or similar after that.
+
+proposed signature :
+`Service_Instance(service_url)`
+`Point(Service_Instance,55, -40, "2006-06-01T00:00:00Z", Service_Instance.coverages['OCCCI_V3_monthly_chlor_a'] )`
