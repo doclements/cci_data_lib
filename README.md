@@ -52,5 +52,7 @@ If we want to make it truly dynamic how are users going to know what coverage na
 I think it is probably OK to assume that, like with libs like `OWSLib`, the user will probably use the library in interactive mode to get the info then will use in static script or similar after that.
 
 proposed signature :
-`Service_Instance(service_url)`
-`Point(Service_Instance,55, -40, "2006-06-01T00:00:00Z", Service_Instance.coverages['OCCCI_V3_monthly_chlor_a'] )`
+```python
+Service_Instance(service_url)
+Point(Service_Instance,55, -40, "2006-06-01T00:00:00Z", Service_Instance.coverages['OCCCI_V3_monthly_chlor_a'] )
+```
