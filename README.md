@@ -58,3 +58,5 @@ proposed signature :
 Service_Instance(service_url)
 Point(Service_Instance,55, -40, "2006-06-01T00:00:00Z", Service_Instance.coverages['OCCCI_V3_monthly_chlor_a'] )
 ```
+
+the time stamp could also be parsed and used from service instance, but i think the method sig is the same, it just takes a string, doesnt care where it came from
