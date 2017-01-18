@@ -44,7 +44,9 @@ The library will allow predefined queries to be run and the results will be pars
 ### how could a fully dynamic system be called?
 
 Current signature is  :
-`Point(_service,55, -40, "2006-06-01T00:00:00Z", coverages['v_3.0']['chlor_a'])`
+```python
+Point(_service,55, -40, "2006-06-01T00:00:00Z", coverages['v_3.0']['chlor_a'])
+```
 This takes a URL from the services dictionary and a coverage from a similar dictionary.
 
 If we want to make it truly dynamic how are users going to know what coverage name to give anyway? Does the actual use of the library implies a certain knowledge about the data?
