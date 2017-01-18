@@ -35,3 +35,5 @@ class AreaTimeseries(Query):
             self.data = self.data.astype(np.float)
         if self.output == "netcdf":
             self.data = web_post_file(self.service, {"query":self.query})
+        if self.output == "geotiff":
+            self.data = web_post_file(self.service, {"query":self.query})

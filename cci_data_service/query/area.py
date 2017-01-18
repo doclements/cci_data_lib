@@ -31,4 +31,5 @@ class Area(Query):
             self.data = self.data.astype(np.float)
         if self.output == "netcdf":
             self.data = web_post_file(self.service, {"query":self.query})
-
+        if self.output == "gtiff":
+            self.data = web_post_file(self.service, {"query":self.query})

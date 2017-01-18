@@ -1,0 +1,72 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Area	cci_data_service/query/area.py	/^class Area(Query):$/;"	kind:class	line:8
+Area	example.py	/^from cci_data_service.query.area import Area$/;"	kind:namespace	line:4
+AreaTimeseries	cci_data_service/query/area_timeseries.py	/^class AreaTimeseries(Query):$/;"	kind:class	line:8
+AreaTimeseries	example.py	/^from cci_data_service.query.area_timeseries import AreaTimeseries$/;"	kind:namespace	line:5
+Point	cci_data_service/query/point.py	/^class Point(Query):$/;"	kind:class	line:7
+Point	example.py	/^from cci_data_service.query.point import Point$/;"	kind:namespace	line:2
+PointTimeSeries	cci_data_service/query/point_timeseries.py	/^class PointTimeSeries(Query):$/;"	kind:class	line:10
+PointTimeSeries	example.py	/^from cci_data_service.query.point_timeseries import PointTimeSeries$/;"	kind:namespace	line:3
+Query	cci_data_service/query/area.py	/^from cci_data_service.query.query import Query$/;"	kind:namespace	line:6
+Query	cci_data_service/query/area_timeseries.py	/^from cci_data_service.query.query import Query$/;"	kind:namespace	line:6
+Query	cci_data_service/query/point.py	/^from cci_data_service.query.query import Query$/;"	kind:namespace	line:5
+Query	cci_data_service/query/point_timeseries.py	/^from cci_data_service.query.query import Query$/;"	kind:namespace	line:7
+Query	cci_data_service/query/query.py	/^class Query(object):$/;"	kind:class	line:3
+__init__	cci_data_service/query/area.py	/^    def __init__(self, service, lat1,lat2, lon1, lon2, date, coverage, output="csv"):$/;"	kind:member	line:9
+__init__	cci_data_service/query/area_timeseries.py	/^    def __init__(self, service, lat1,lat2, lon1, lon2, start_date, end_date, coverage, output="csv"):$/;"	kind:member	line:9
+__init__	cci_data_service/query/point.py	/^    def __init__(self, service, lat, lon, date, coverage):$/;"	kind:member	line:8
+__init__	cci_data_service/query/point_timeseries.py	/^    def __init__(self, service, lat, lon, start_date, end_date, coverage):$/;"	kind:member	line:11
+__init__	cci_data_service/query/query.py	/^    def __init__(self, service, coverage):$/;"	kind:member	line:4
+__init__.py	cci_data_service/__init__.py	1;"	kind:file	line:1
+__init__.py	cci_data_service/query/__init__.py	1;"	kind:file	line:1
+__init__.py	cci_data_service/results/__init__.py	1;"	kind:file	line:1
+__init__.py	tests/__init__.py	1;"	kind:file	line:1
+_ecmwf_service	example.py	/^_ecmwf_service = services['ecmwf']$/;"	kind:variable	line:12
+_get_data	cci_data_service/query/area.py	/^    def _get_data(self):$/;"	kind:member	line:24
+_get_data	cci_data_service/query/area_timeseries.py	/^    def _get_data(self):$/;"	kind:member	line:25
+_get_data	cci_data_service/query/point.py	/^    def _get_data(self):$/;"	kind:member	line:18
+_get_data	cci_data_service/query/point_timeseries.py	/^    def _get_data(self):$/;"	kind:member	line:22
+_service	example.py	/^_service = services['pml']$/;"	kind:variable	line:11
+area	example.py	/^area = Area(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="gtiff")$/;"	kind:variable	line:26
+area.py	cci_data_service/query/area.py	1;"	kind:file	line:1
+area_extraction	cci_data_service/query/area.py	/^from .templates import area_extraction$/;"	kind:namespace	line:4
+area_timeseries.py	cci_data_service/query/area_timeseries.py	1;"	kind:file	line:1
+area_timeseries_extraction	cci_data_service/query/area_timeseries.py	/^from .templates import area_timeseries_extraction$/;"	kind:namespace	line:4
+coverages	cci_data_service/__init__.py	/^coverages = {$/;"	kind:variable	line:1
+coverages	example.py	/^from cci_data_service import coverages, services$/;"	kind:namespace	line:1
+create_query	cci_data_service/query/area.py	/^from cci_data_service.utils import create_query, web_post, web_post_file$/;"	kind:namespace	line:5
+create_query	cci_data_service/query/area_timeseries.py	/^from cci_data_service.utils import create_query, web_post, web_post_file$/;"	kind:namespace	line:5
+create_query	cci_data_service/query/point.py	/^from cci_data_service.utils import create_query, web_post$/;"	kind:namespace	line:4
+create_query	cci_data_service/query/point_timeseries.py	/^from cci_data_service.utils import create_query, web_post$/;"	kind:namespace	line:6
+create_query	cci_data_service/utils.py	/^def create_query(queryObj):$/;"	kind:function	line:6
+example.py	example.py	1;"	kind:file	line:1
+matplotlib	example.py	/^import matplotlib$/;"	kind:namespace	line:9
+matplotlib	example.py	/^import matplotlib.pyplot as plt$/;"	kind:namespace	line:7
+np	cci_data_service/query/area.py	/^import numpy as np$/;"	kind:namespace	line:2
+np	cci_data_service/query/area_timeseries.py	/^import numpy as np$/;"	kind:namespace	line:2
+np	cci_data_service/query/point_timeseries.py	/^import numpy as np$/;"	kind:namespace	line:3
+np	example.py	/^import numpy as np$/;"	kind:namespace	line:8
+plt	example.py	/^import matplotlib.pyplot as plt$/;"	kind:namespace	line:7
+point.py	cci_data_service/query/point.py	1;"	kind:file	line:1
+point_extraction	cci_data_service/query/point.py	/^from .templates import point_extraction$/;"	kind:namespace	line:3
+point_extraction_timeseries	cci_data_service/query/point_timeseries.py	/^from .templates import point_extraction_timeseries$/;"	kind:namespace	line:5
+point_timeseries.py	cci_data_service/query/point_timeseries.py	1;"	kind:file	line:1
+query.py	cci_data_service/query/query.py	1;"	kind:file	line:1
+requests	cci_data_service/utils.py	/^import requests$/;"	kind:namespace	line:2
+services	cci_data_service/__init__.py	/^services = {$/;"	kind:variable	line:13
+services	example.py	/^from cci_data_service import coverages, services$/;"	kind:namespace	line:1
+templates.py	cci_data_service/query/templates.py	1;"	kind:file	line:1
+utils.py	cci_data_service/utils.py	1;"	kind:file	line:1
+web_post	cci_data_service/query/area.py	/^from cci_data_service.utils import create_query, web_post, web_post_file$/;"	kind:namespace	line:5
+web_post	cci_data_service/query/area_timeseries.py	/^from cci_data_service.utils import create_query, web_post, web_post_file$/;"	kind:namespace	line:5
+web_post	cci_data_service/query/point.py	/^from cci_data_service.utils import create_query, web_post$/;"	kind:namespace	line:4
+web_post	cci_data_service/query/point_timeseries.py	/^from cci_data_service.utils import create_query, web_post$/;"	kind:namespace	line:6
+web_post	cci_data_service/utils.py	/^def web_post(url, payload):$/;"	kind:function	line:12
+web_post_file	cci_data_service/query/area.py	/^from cci_data_service.utils import create_query, web_post, web_post_file$/;"	kind:namespace	line:5
+web_post_file	cci_data_service/query/area_timeseries.py	/^from cci_data_service.utils import create_query, web_post, web_post_file$/;"	kind:namespace	line:5
+web_post_file	cci_data_service/utils.py	/^def web_post_file(url, payload):$/;"	kind:function	line:15

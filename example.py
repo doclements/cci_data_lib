@@ -23,9 +23,10 @@ _ecmwf_service = services['ecmwf']
 # pointTS = PointTimeSeries(_service,55, -40, "2006-06-01T00:00:00Z","2006-10-01T00:00:00Z", coverages['v_3.0']['chlor_a'])
 # print pointTS.data
 
-# area = Area(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="netcdf")
-# with open('test_output.nc', 'w') as outfile:
-#    outfile.write(area.data)
+area = Area(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="gtiff")
+print area.query
+with open('test_output.tiff', 'w') as outfile:
+   outfile.write(area.data)
 
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
@@ -69,8 +70,11 @@ _ecmwf_service = services['ecmwf']
 # print point.data  - 273.15
 
 # ECMWF time series test
-point = PointTimeSeries(_ecmwf_service,50.347472, -4.217737,  "2010-03-01T12:00:00Z", "2012-03-01T12:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
-plt.plot([x - 273.15 for x in point.data][0::4])
-plt.show()
+# point = PointTimeSeries(_ecmwf_service,50.347472, -4.217737,  "2010-03-01T12:00:00Z", "2012-03-01T12:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
+# plt.plot([x - 273.15 for x in point.data][0::4])
+# plt.show()
 
- 
+
+# point = PointTimeSeries(_ecmwf_service,51.584852, -4.196566,  "2010-03-01T12:00:00Z", "2012-03-01T12:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
+# plt.plot([x - 273.15 for x in point.data][0::4])
+# plt.show()

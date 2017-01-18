@@ -1,5 +1,7 @@
 # pylint: disable=W0311
 
+import numpy as np
+
 from .templates import point_extraction_timeseries
 from cci_data_service.utils import create_query, web_post
 from cci_data_service.query.query import Query
@@ -19,4 +21,4 @@ class PointTimeSeries(Query):
 
     def _get_data(self):
         self.query = create_query(self)
-        self.data = [float(x) for x in web_post(self.service, {"query":self.query})[1:-1].split(',')]
+        self.data = np.array([float(x) for x in web_post(self.service, {"query":self.query})[1:-1].split(',')])
