@@ -12,7 +12,7 @@ import matplotlib
 _service = services['pml']
 _ecmwf_service = services['ecmwf']
 
-service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
+#service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
 
 # point = Point(service,55, -40, "2006-06-01T00:00:00Z", service.coverages['OCCCI_V3_monthly_chlor_a'])
 
@@ -87,3 +87,7 @@ service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
 
 
 # MEEO test - they dont use ansi so this is a test of the config files
+# example date 2016-07-14T11:10:52Z for coverage L8_B2_32630_30
+meeo_service = Service("http://eodataservice.org/rasdaman/ows")
+point = Point(meeo_service,50.347472, -4.217737, "2016-07-14T11:10:52Z", meeo_service.coverages['L8_B2_32630_30'])
+print point.data
