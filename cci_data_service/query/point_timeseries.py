@@ -10,9 +10,10 @@ from cci_data_service.query.query import Query
 class PointTimeSeries(Query):
     def __init__(self, service, lat, lon, start_date, end_date, coverage):
         super(PointTimeSeries, self).__init__(service, coverage)
-        self.coords = {
+        self.template_params = {
             "lat": lat,
             "lon": lon,
+            "time_label":self.coverage_time,
             "date1": start_date,
             "date2": end_date
         }
@@ -21,4 +22,4 @@ class PointTimeSeries(Query):
 
     def _get_data(self):
         self.query = create_query(self)
-        self.data = np.array([float(x) for x in web_post(self.service, {"query":self.query})[1:-1].split(',')])
+        self.data = np.array([float(x) for x in web_post(self.wcps_url, {"query":self.query})[1:-1].split(',')])

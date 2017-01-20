@@ -8,12 +8,13 @@ from cci_data_service.query.query import Query
 class Area(Query):
     def __init__(self, service, lat1,lat2, lon1, lon2, date, coverage, output="csv"):
         super(Area, self).__init__(service, coverage)
-        self.coords = {
+        self.template_params = {
             "lat1": lat1,
             "lat2": lat2,
             "lon1": lon1,
             "lon2": lon2,
             "date": date,
+            "time_label":self.coverage_time,
             "output": output
         }
         self.output = output
@@ -24,12 +25,12 @@ class Area(Query):
     def _get_data(self):
         self.query = create_query(self)
         if self.output == "csv":
-            self.data = web_post(self.service, {"query":self.query})[1:-1]
+            self.data = web_post(self.wcps_url, {"query":self.query})[1:-1]
             self.data = self.data.split('},{')
             self.data = [x.split(',') for x in self.data]
             self.data = np.array(self.data)
             self.data = self.data.astype(np.float)
         if self.output == "netcdf":
-            self.data = web_post_file(self.service, {"query":self.query})
+            self.data = web_post_file(self.wcps_url, {"query":self.query})
         if self.output == "gtiff":
-            self.data = web_post_file(self.service, {"query":self.query})
+            self.data = web_post_file(self.wcps_url, {"query":self.query})

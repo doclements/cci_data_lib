@@ -3,6 +3,7 @@ from cci_data_service.query.point import Point
 from cci_data_service.query.point_timeseries import PointTimeSeries
 from cci_data_service.query.area import Area
 from cci_data_service.query.area_timeseries import AreaTimeseries
+from cci_data_service.service import Service
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,7 +12,10 @@ import matplotlib
 _service = services['pml']
 _ecmwf_service = services['ecmwf']
 
-# point = Point(_service,55, -40, "2006-06-01T00:00:00Z", coverages['v_3.0']['chlor_a'])
+service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
+
+# point = Point(service,55, -40, "2006-06-01T00:00:00Z", service.coverages['OCCCI_V3_monthly_chlor_a'])
+
 # print point.data
 
 # point = Point(_service,55, -40, "2006-05-31T23:59:00Z", coverages['v_2.0']['chlor_a'])
@@ -20,18 +24,20 @@ _ecmwf_service = services['ecmwf']
 # point = Point(_service,55, -40, "2006-06-30T23:59:00Z", coverages['v_2.0']['chlor_a'])
 # print point.data
 
-# pointTS = PointTimeSeries(_service,55, -40, "2006-06-01T00:00:00Z","2006-10-01T00:00:00Z", coverages['v_3.0']['chlor_a'])
+# pointTS = PointTimeSeries(service,55, -40, "2006-06-01T00:00:00Z","2006-10-01T00:00:00Z", service.coverages['OCCCI_V3_monthly_chlor_a'])
 # print pointTS.data
 
-area = Area(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="gtiff")
-print area.query
-with open('test_output.tiff', 'w') as outfile:
-   outfile.write(area.data)
+
+
+# area = Area(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="gtiff")
+# print area.query
+# with open('test_output.tiff', 'w') as outfile:
+#    outfile.write(area.data)
 
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
 # need a clean way to remove nulls
-# area = Area(_service, 50, 70, -50, -10, "2006-09-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="csv")
+# area = Area(service, 40, 60, -50, -00, "2006-09-01T00:00:00Z",service.coverages['OCCCI_V3_monthly_chlor_a'], output="csv")
 # print area.data.shape
 # print area.data
 # print np.min(area.data)
@@ -48,7 +54,7 @@ with open('test_output.tiff', 'w') as outfile:
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
 # need a clean way to remove nulls
-# areaTS = AreaTimeseries(_service, 50, 60, -15, 0, "2006-06-01T00:00:00Z","2006-11-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="csv")
+# areaTS = AreaTimeseries(service, 50, 60, -15, 0, "2006-06-01T00:00:00Z","2006-11-01T00:00:00Z",service.coverages['OCCCI_V3_monthly_chlor_a'], output="csv")
 # areaTS.data[areaTS.data == 9.96921e+36] = None
 # _min =  np.nanmin(areaTS.data)
 # _max =  np.nanmax(areaTS.data)
@@ -78,3 +84,6 @@ with open('test_output.tiff', 'w') as outfile:
 # point = PointTimeSeries(_ecmwf_service,51.584852, -4.196566,  "2010-03-01T12:00:00Z", "2012-03-01T12:00:00Z", coverages['ecmwf_test']['2m_air_temp'])
 # plt.plot([x - 273.15 for x in point.data][0::4])
 # plt.show()
+
+
+# MEEO test - they dont use ansi so this is a test of the config files

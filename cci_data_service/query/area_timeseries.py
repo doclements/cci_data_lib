@@ -8,14 +8,16 @@ from cci_data_service.query.query import Query
 class AreaTimeseries(Query):
     def __init__(self, service, lat1,lat2, lon1, lon2, start_date, end_date, coverage, output="csv"):
         super(AreaTimeseries, self).__init__(service, coverage)
-        self.coords = {
+        self.template_params = {
             "lat1": lat1,
             "lat2": lat2,
             "lon1": lon1,
             "lon2": lon2,
             "date1": start_date,
             "date2": end_date,
-            "output": output
+            "output": output,
+            "time_label":self.coverage_time
+
         }
         self.output = output
         self.template = area_timeseries_extraction
@@ -25,7 +27,7 @@ class AreaTimeseries(Query):
     def _get_data(self):
         self.query = create_query(self)
         if self.output == "csv":
-            self.data = web_post(self.service, {"query":self.query})
+            self.data = web_post(self.wcps_url, {"query":self.query})
             self.data = self.data[2:-2]
             self.data = self.data.split('}},{{')
 
@@ -34,6 +36,6 @@ class AreaTimeseries(Query):
             self.data = np.array(self.data)
             self.data = self.data.astype(np.float)
         if self.output == "netcdf":
-            self.data = web_post_file(self.service, {"query":self.query})
+            self.data = web_post_file(self.wcps_url, {"query":self.query})
         if self.output == "geotiff":
-            self.data = web_post_file(self.service, {"query":self.query})
+            self.data = web_post_file(self.wcps_url, {"query":self.query})

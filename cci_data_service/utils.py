@@ -4,8 +4,8 @@ import requests
 
 
 def create_query(queryObj):
-   queryObj.coords['coverage'] = queryObj.coverage
-   _q = queryObj.template.format(**queryObj.coords)
+   queryObj.template_params['coverage'] = queryObj.coverage['name']
+   _q = queryObj.template.format(**queryObj.template_params)
    return _q
 
 
