@@ -4,7 +4,7 @@ point_extraction = """
 for c in ({coverage})
 return
 encode (
-   c[Lat({lat}), Long({lon}), {time_label}("{date}")], "csv"
+   c[N({lat}), E({lon}), {time_label}("{date}")], "csv"
 )
 """
 area_extraction = """

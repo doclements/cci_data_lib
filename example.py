@@ -12,6 +12,7 @@ import matplotlib
 _service = services['pml']
 _ecmwf_service = services['ecmwf']
 
+print "blah"
 #service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
 
 # point = Point(service,55, -40, "2006-06-01T00:00:00Z", service.coverages['OCCCI_V3_monthly_chlor_a'])
@@ -50,7 +51,9 @@ _ecmwf_service = services['ecmwf']
 # areaTS = AreaTimeseries(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z","2006-09-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="netcdf")
 # with open('test_output_TS.nc', 'w') as outfile:
 #    outfile.write(areaTS.data)
+"""
 
+"""
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
 # need a clean way to remove nulls
@@ -89,5 +92,5 @@ _ecmwf_service = services['ecmwf']
 # MEEO test - they dont use ansi so this is a test of the config files
 # example date 2016-07-14T11:10:52Z for coverage L8_B2_32630_30
 meeo_service = Service("http://eodataservice.org/rasdaman/ows")
-point = Point(meeo_service,50.347472, -4.217737, "2016-07-14T11:10:52Z", meeo_service.coverages['L8_B2_32630_30'])
+point = Point(meeo_service, 2663400,109790, "2016-07-14T11:10:52Z", meeo_service.coverages['L8_B2_32630_30'])
 print point.data

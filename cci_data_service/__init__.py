@@ -14,3 +14,11 @@ services = {
     "pml" : "http://earthserver.pml.ac.uk/rasdaman/ows/wcps",
     "ecmwf" : "http://earthserver.ecmwf.int/rasdaman/ows/wcps"
 }
+
+
+x_y_lookup = {
+    "E" : "X", 
+    "N" : "Y",
+    "Lat" : "Y",
+    "Long" : "X"
+}

@@ -54,6 +54,8 @@ class Service(object):
             try:
                t_cov = {}
                t_cov['time_axis_name'] = [item for item in _wcs.contents[_cov].grid.axislabels if item not in self.axis_removes]
+               # gather X and Y coords definition
+               
                config['coverages'][_cov]= t_cov
                self.coverages.append(_cov)
             except Exception:

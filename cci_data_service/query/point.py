@@ -18,4 +18,5 @@ class Point(Query):
 
     def _get_data(self):
         self.query = create_query(self)
+        print self.query
         self.data = float(web_post(self.wcps_url, {"query":self.query})[1:-1])
