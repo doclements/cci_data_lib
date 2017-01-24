@@ -6,6 +6,8 @@ import os
 from owslib.wcs import WebCoverageService
 import json
 
+from cci_data_service.utils import get_lat_long
+
 
 
 class Service(object):
@@ -18,7 +20,7 @@ class Service(object):
         # these two lists are to fix issues at the moemnt NEED TO BE REMOVED
         self.axis_removes = ['Lat','Lon','latitude','longitude','lat','lon','Long','long','Latitude', 'Longitude', 'Easting', 'Northing','E','N']
         self.banned = ['NCITest4', 'NCITest5', 'L8_B8_32631_15', 'LS8_test_tile']
-        self.coverages = []
+        self.coverages = {}
         self._setup()
 
 
@@ -53,12 +55,16 @@ class Service(object):
             #if _cov not in self.banned:
             try:
                t_cov = {}
-               t_cov['time_axis_name'] = [item for item in _wcs.contents[_cov].grid.axislabels if item not in self.axis_removes]
+               t_cov['time_axis_name'] = [item for item in _wcs.contents[_cov].grid.axislabels if item not in self.axis_removes][0]
+               spatial_axis = [item for item in _wcs.contents[_cov].grid.axislabels if item in self.axis_removes]
+               for p in spatial_axis:
+                   t_cov[get_lat_long(p)+'_axis_name'] = p
                # gather X and Y coords definition
-               
-               config['coverages'][_cov]= t_cov
-               self.coverages.append(_cov)
-            except Exception:
+               t_cov['name'] = _cov
+               config['coverages'][_cov] = t_cov
+               self.coverages[_cov] = t_cov
+            except Exception, e:
+               print e
                print "coverage {} failed you should check it".format(_cov)
         config_file.write(json.dumps(config))
         return

@@ -11,7 +11,9 @@ class Point(Query):
             "lat": lat,
             "lon": lon,
             "date": date,
-            "time_label":self.coverage_time
+            "time_label":self.coverage_time,
+            "x_label":self.x_name,
+            "y_label":self.y_name
         }
         self.template = point_extraction
         self._get_data()

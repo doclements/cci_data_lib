@@ -15,7 +15,9 @@ class PointTimeSeries(Query):
             "lon": lon,
             "time_label":self.coverage_time,
             "date1": start_date,
-            "date2": end_date
+            "date2": end_date,
+            "x_label":self.x_name,
+            "y_label":self.y_name
         }
         self.template = point_extraction_timeseries
         self._get_data()

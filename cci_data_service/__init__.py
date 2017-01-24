@@ -17,6 +17,6 @@ services = {
 
 
 x_y_lookup = {
-    "X" : ["E", "Long"],
-    "Y" : ["N", "Lat"]
+    "X" : ["E", "Long", "e", "lon", "long", "longitude", "Lon", "Longitude"],
+    "Y" : ["N", "Lat", "n", "lat", "latitude", "Latitude"]
 }

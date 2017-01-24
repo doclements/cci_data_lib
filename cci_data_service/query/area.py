@@ -15,6 +15,8 @@ class Area(Query):
             "lon2": lon2,
             "date": date,
             "time_label":self.coverage_time,
+            "x_label":self.x_name,
+            "y_label":self.y_name,
             "output": output
         }
         self.output = output

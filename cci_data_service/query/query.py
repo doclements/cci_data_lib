@@ -5,7 +5,10 @@ class Query(object):
         super(Query, self).__init__()
         self.service = service
         self.wcps_url = service.wcps_url
-        self.coverage = coverage
-        self.coverage_time = str(coverage['time_axis_name'][0])
+        self.coverage = coverage['name']
+        self.coverage_time = str(coverage['time_axis_name'])
+        self.x_name = str(coverage['X_axis_name'])
+        self.y_name = str(coverage['Y_axis_name'])
+
         self.data = None
        

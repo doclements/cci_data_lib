@@ -16,7 +16,9 @@ class AreaTimeseries(Query):
             "date1": start_date,
             "date2": end_date,
             "output": output,
-            "time_label":self.coverage_time
+            "time_label":self.coverage_time,
+            "x_label":self.x_name,
+            "y_label":self.y_name
 
         }
         self.output = output
