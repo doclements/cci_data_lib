@@ -1,9 +1,13 @@
+# pylint: disable=W0311
+
 from cci_data_service import coverages, services
 from cci_data_service.query.point import Point
 from cci_data_service.query.point_timeseries import PointTimeSeries
 from cci_data_service.query.area import Area
 from cci_data_service.query.area_timeseries import AreaTimeseries
 from cci_data_service.service import Service
+
+from cci_data_service.query.query import Query
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -38,14 +42,14 @@ service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
 
 # csv output will be auto parsed into a numpy array this example then snows potting that using matplot lib
 # need a clean way to remove nulls
-area = Area(service, 40, 60, -50, -0, "2006-09-01T00:00:00Z",service.coverages['OCCCI_V3_monthly_chlor_a'], output="csv")
-print area.data.shape
-print area.data
-print np.min(area.data)
-print np.max(area.data)
-area.data[area.data == 9.96921e+36] = None
-plt.imshow(area.data, norm=matplotlib.colors.LogNorm())
-plt.show()
+# area = Area(service, 40, 60, -50, -0, "2006-09-01T00:00:00Z",service.coverages['OCCCI_V3_monthly_chlor_a'], output="csv")
+# print area.data.shape
+# print area.data
+# print np.min(area.data)
+# print np.max(area.data)
+# area.data[area.data == 9.96921e+36] = None
+# plt.imshow(area.data, norm=matplotlib.colors.LogNorm())
+# plt.show()
 
 
 # areaTS = AreaTimeseries(_service, 50, 80, -50, 0, "2006-06-01T00:00:00Z","2006-09-01T00:00:00Z",coverages['v_3.0']['chlor_a'], output="netcdf")
@@ -102,6 +106,63 @@ plt.show()
 
 # MEEO test - they dont use ansi so this is a test of the config files
 # example date 2016-07-14T11:10:52Z for coverage L8_B2_32630_30
-# meeo_service = Service("http://eodataservice.org/rasdaman/ows")
+meeo_service = Service("http://eodataservice.org/rasdaman/ows")
 # point = Point(meeo_service, 2663400,109790, "2016-07-14T11:10:52Z", meeo_service.coverages['L8_B2_32630_30'])
 # print point.data
+
+# meeo_area = Area(meeo_service, 4902991, 4917275, 377983, 390000, "2015-05-31T10:34:57Z" , meeo_service.coverages['L8_B5_32631_30'])
+# print meeo_area.data.shape
+# print meeo_area.data
+# print np.min(meeo_area.data)
+# print np.max(meeo_area.data)
+# plt.imshow(meeo_area.data)
+# plt.show()
+
+
+from cci_data_service.query.templates import landsat_rgb_area
+from cci_data_service.utils import create_query, web_post, web_post_file
+
+class CustomQuery(Query):
+    def __init__(self, service, south, north, west, east, date, coverage_id, output="csv"):
+        coverage = service.coverages['L8_B5_'+coverage_id]
+        super(CustomQuery, self).__init__(service, coverage)
+        self.template_params = {
+            "swath_id": coverage_id,
+            "south": south,
+            "north": north,
+            "west": west,
+            "east": east,
+            "date": date,
+            "time_label":self.coverage_time,
+            "x_label":self.x_name,
+            "y_label":self.y_name
+        }
+        self.output = output
+        self.template = landsat_rgb_area
+        self._get_data()
+
+    def _get_data(self):
+        self.query = create_query(self)
+        print self.query
+        if self.output == "csv":
+            self.data = web_post(self.wcps_url, {"query":self.query})[1:-1]
+            self.data = self.data.split('},{')
+            self.data = [x.split(',') for x in self.data]
+            self.data = np.array(self.data)
+            self.data = self.data.astype(np.float)
+        if self.output == "netcdf":
+            self.data = web_post_file(self.wcps_url, {"query":self.query})
+        if self.output == "gtiff":
+            self.data = web_post_file(self.wcps_url, {"query":self.query})
+        if self.output == "png":
+            #
+
+
+
+meeo_area = CustomQuery(meeo_service, 4902991, 4917275, 377983, 390000, "2015-05-31T10:34:57Z" , "32631_30")
+print meeo_area.data.shape
+print meeo_area.data
+print np.min(meeo_area.data)
+print np.max(meeo_area.data)
+plt.imshow(meeo_area.data)
+plt.show()
