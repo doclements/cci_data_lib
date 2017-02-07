@@ -50,23 +50,37 @@ class Service(object):
         config = {}
         _covs = _wcs.contents.keys()
         config['coverages'] = {}
+        config_file.write('{ "coverages": {')
+        pos = 0
         for _cov in _covs:
             #print "writting coverage info for "+_cov
             #if _cov not in self.banned:
             try:
                t_cov = {}
-               t_cov['time_axis_name'] = [item for item in _wcs.contents[_cov].grid.axislabels if item not in self.axis_removes][0]
+               try:
+                   t_cov['time_axis_name'] = [item for item in _wcs.contents[_cov].grid.axislabels if item not in self.axis_removes][0]
+               except Exception, e:
+                   t_cov['time_axis_name'] = ''
                spatial_axis = [item for item in _wcs.contents[_cov].grid.axislabels if item in self.axis_removes]
                for p in spatial_axis:
                    t_cov[get_lat_long(p)+'_axis_name'] = p
                # gather X and Y coords definition
+               del _wcs.contents[_cov]
                t_cov['name'] = _cov
-               config['coverages'][_cov] = t_cov
+               #print json.dumps({ _cov :t_cov})
+               #{"OCCCI_V3_monthly_rrs_555_bias": {"Y_axis_name": "Lat", "X_axis_name": "Long", "name": "OCCCI_V3_monthly_rrs_555_bias", "time_axis_name": "ansi"}}
+               t_json_string = json.dumps({ _cov :t_cov})[1:-1]
+               if pos < len(_covs) -1:
+                   t_json_string = t_json_string + ','
+               config_file.write(t_json_string)
+               #config['coverages'][_cov] = t_cov
                self.coverages[_cov] = t_cov
+               pos = pos + 1
             except Exception, e:
                print e
                print "coverage {} failed you should check it".format(_cov)
-        config_file.write(json.dumps(config))
+        #config_file.write(json.dumps(config))
+        config_file.write('} }')
         return
 
 

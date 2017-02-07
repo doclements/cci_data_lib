@@ -13,13 +13,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
 
-_service = services['pml']
-_ecmwf_service = services['ecmwf']
+# _service = services['pml']
+# _ecmwf_service = services['ecmwf']
 
-# print "blah"
-service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
+# # print "blah"
+# service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
 
-# point = Point(service,55, -40, "2006-06-01T00:00:00Z", service.coverages['OCCCI_V3_monthly_chlor_a'])
+# point = Point(service,55, -40,  service.coverages['OCCCI_V3_monthly_chlor_a'], date="2006-06-01T00:00:00Z")
 
 # print point.data
 
@@ -106,9 +106,10 @@ service = Service("http://earthserver.pml.ac.uk/rasdaman/ows")
 
 # MEEO test - they dont use ansi so this is a test of the config files
 # example date 2016-07-14T11:10:52Z for coverage L8_B2_32630_30
-meeo_service = Service("http://eodataservice.org/rasdaman/ows")
-# point = Point(meeo_service, 2663400,109790, "2016-07-14T11:10:52Z", meeo_service.coverages['L8_B2_32630_30'])
-# print point.data
+# frt00008306_07_if163l_trr3
+jub_service = Service("http://access.planetserver.eu:8080/rasdaman/ows")
+point = Point(jub_service, 562.6610837,298.2737483, jub_service.coverages['frt0000a0ac_07_if165l_trr3'])
+print point.data
 
 # meeo_area = Area(meeo_service, 4902991, 4917275, 377983, 390000, "2015-05-31T10:34:57Z" , meeo_service.coverages['L8_B5_32631_30'])
 # print meeo_area.data.shape
@@ -119,50 +120,50 @@ meeo_service = Service("http://eodataservice.org/rasdaman/ows")
 # plt.show()
 
 
-from cci_data_service.query.templates import landsat_rgb_area
-from cci_data_service.utils import create_query, web_post, web_post_file
+# from cci_data_service.query.templates import landsat_rgb_area
+# from cci_data_service.utils import create_query, web_post, web_post_file
 
-class CustomQuery(Query):
-    def __init__(self, service, south, north, west, east, date, coverage_id, output="csv"):
-        coverage = service.coverages['L8_B5_'+coverage_id]
-        super(CustomQuery, self).__init__(service, coverage)
-        self.template_params = {
-            "swath_id": coverage_id,
-            "south": south,
-            "north": north,
-            "west": west,
-            "east": east,
-            "date": date,
-            "time_label":self.coverage_time,
-            "x_label":self.x_name,
-            "y_label":self.y_name
-        }
-        self.output = output
-        self.template = landsat_rgb_area
-        self._get_data()
+# class CustomQuery(Query):
+#     def __init__(self, service, south, north, west, east, date, coverage_id, output="csv"):
+#         coverage = service.coverages['L8_B5_'+coverage_id]
+#         super(CustomQuery, self).__init__(service, coverage)
+#         self.template_params = {
+#             "swath_id": coverage_id,
+#             "south": south,
+#             "north": north,
+#             "west": west,
+#             "east": east,
+#             "date": date,
+#             "time_label":self.coverage_time,
+#             "x_label":self.x_name,
+#             "y_label":self.y_name
+#         }
+#         self.output = output
+#         self.template = landsat_rgb_area
+#         self._get_data()
 
-    def _get_data(self):
-        self.query = create_query(self)
-        print self.query
-        if self.output == "csv":
-            self.data = web_post(self.wcps_url, {"query":self.query})[1:-1]
-            self.data = self.data.split('},{')
-            self.data = [x.split(',') for x in self.data]
-            self.data = np.array(self.data)
-            self.data = self.data.astype(np.float)
-        if self.output == "netcdf":
-            self.data = web_post_file(self.wcps_url, {"query":self.query})
-        if self.output == "gtiff":
-            self.data = web_post_file(self.wcps_url, {"query":self.query})
-        if self.output == "png":
-            #
+#     def _get_data(self):
+#         self.query = create_query(self)
+#         print self.query
+#         if self.output == "csv":
+#             self.data = web_post(self.wcps_url, {"query":self.query})[1:-1]
+#             self.data = self.data.split('},{')
+#             self.data = [x.split(',') for x in self.data]
+#             self.data = np.array(self.data)
+#             self.data = self.data.astype(np.float)
+#         if self.output == "netcdf":
+#             self.data = web_post_file(self.wcps_url, {"query":self.query})
+#         if self.output == "gtiff":
+#             self.data = web_post_file(self.wcps_url, {"query":self.query})
+#         if self.output == "png":
+#             #
 
 
 
-meeo_area = CustomQuery(meeo_service, 4902991, 4917275, 377983, 390000, "2015-05-31T10:34:57Z" , "32631_30")
-print meeo_area.data.shape
-print meeo_area.data
-print np.min(meeo_area.data)
-print np.max(meeo_area.data)
-plt.imshow(meeo_area.data)
-plt.show()
+# meeo_area = CustomQuery(meeo_service, 4902991, 4917275, 377983, 390000, "2015-05-31T10:34:57Z" , "32631_30")
+# print meeo_area.data.shape
+# print meeo_area.data
+# print np.min(meeo_area.data)
+# print np.max(meeo_area.data)
+# plt.imshow(meeo_area.data)
+# plt.show()

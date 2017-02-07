@@ -7,11 +7,25 @@ encode (
    c[{y_label}({lat}), {x_label}({lon}), {time_label}("{date}")], "csv"
 )
 """
+point_extraction_no_time = """
+for c in ({coverage})
+return
+encode (
+   c[{y_label}({lat}), {x_label}({lon})], "csv"
+)
+"""
 area_extraction = """
 for c in ({coverage})
 return
 encode (
    c[{y_label}({lat1}:{lat2}), {x_label}({lon1}:{lon2}), {time_label}("{date}")], "{output}"
+)
+"""
+area_extraction_no_time = """
+for c in ({coverage})
+return
+encode (
+   c[{y_label}({lat1}:{lat2}), {x_label}({lon1}:{lon2})], "{output}"
 )
 """
 point_extraction_timeseries = """
