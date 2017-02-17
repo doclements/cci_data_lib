@@ -108,8 +108,14 @@ import matplotlib
 # example date 2016-07-14T11:10:52Z for coverage L8_B2_32630_30
 # frt00008306_07_if163l_trr3
 jub_service = Service("http://access.planetserver.eu:8080/rasdaman/ows")
-point = Point(jub_service, 562.6610837,298.2737483, jub_service.coverages['frt0000a0ac_07_if165l_trr3'])
-print point.data
+# point = Point(jub_service, 562.6610837,298.2737483, jub_service.coverages['frt0000a0ac_07_if165l_trr3'])
+# print point.data
+
+area = Area(jub_service, 562.6610837, 600, 298.2737483, 320, jub_service.coverages['frt0000a0ac_07_if165l_trr3'], output="netcdf")
+with open('test_output_jub_area.nc', 'w') as outfile:
+   outfile.write(area.data)
+#print point.data
+
 
 # meeo_area = Area(meeo_service, 4902991, 4917275, 377983, 390000, "2015-05-31T10:34:57Z" , meeo_service.coverages['L8_B5_32631_30'])
 # print meeo_area.data.shape

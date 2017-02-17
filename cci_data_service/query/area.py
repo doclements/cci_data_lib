@@ -40,6 +40,7 @@ class Area(Query):
         self.query = create_query(self)
         if self.output == "csv":
             self.data = web_post(self.wcps_url, {"query":self.query})[1:-1]
+            print self.data
             self.data = self.data.split('},{')
             self.data = [x.split(',') for x in self.data]
             self.data = np.array(self.data)
