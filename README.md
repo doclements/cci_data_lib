@@ -6,7 +6,7 @@ The library aims to provide programatic access to the complete ESA OC-CCI data c
 
 The library will allow predefined queries to be run and the results will be parsed into appropriate data structure. Most will utilise [numpy](http://www.numpy.org/). 
 
-## TBD
+## implimented
 
 1. simple point extraction
 2. simple point timeseries extraction 
